@@ -3,12 +3,16 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const Home = (resolve) => {
-  import('@/components/Home').then(module=>{
+//直接return
+// const Home = () => import('@/components/Home')
+// const Home = function(){
+//   return import('@/components/Home')
+// }
+const Home =(resolve) =>{
+  import('@/components/Home').then(module =>{
     resolve(module)
   })
 }
-
 const router = new Router({
   mode:'history',
   routes:[
