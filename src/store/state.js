@@ -1,5 +1,5 @@
 //全局状态
 const state = {
-    aaa: ''
+    globalData: ''
 }
 export default state

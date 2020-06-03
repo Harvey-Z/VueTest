@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: 'App',
   data(){
@@ -18,13 +18,15 @@ export default {
    
   },
   mounted(){
-     this.aaa()
+     this.Assignment()
   },
   methods:{
-    ...mapActions(['ActionsAAA']),
-    aaa(){
-      // this.ActionsAAA('',1)
-      this.$store.dispatch('ActionsAAA',1111)
+    ...mapActions(['ActionsGlobaldata']),
+    Assignment(){
+      this.ActionsGlobaldata(12)
+
+      //两种写法
+      // this.$store.dispatch('ActionsGlobaldata', 12)
     }
   }
 }

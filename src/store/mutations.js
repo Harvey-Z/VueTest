@@ -1,7 +1,6 @@
 const mutations = {
-    mutationsAAA(state, data){
-        console.info(data)
-        state.aaa = data
+    mutationsGlobaldata(state, data){
+        state.globalData = data
     }
 }
 export default mutations

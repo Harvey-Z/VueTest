@@ -1,5 +1,4 @@
-const ActionsAAA = ({commit}, obj)=>{
-    console.info(obj)
-    return commit('mutationsAAA', obj)
+const ActionsGlobaldata = ({commit}, obj)=>{
+    return commit('mutationsGlobaldata', obj)
 }
-export {ActionsAAA}
+export { ActionsGlobaldata }
