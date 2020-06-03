@@ -5,8 +5,28 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
-  name: 'App'
+  name: 'App',
+  data(){
+    return {
+      
+    }
+  },
+  computed:{
+    //更新state
+   
+  },
+  mounted(){
+     this.aaa()
+  },
+  methods:{
+    ...mapActions(['ActionsAAA']),
+    aaa(){
+      // this.ActionsAAA('',1)
+      this.$store.dispatch('ActionsAAA',1111)
+    }
+  }
 }
 </script>
 
