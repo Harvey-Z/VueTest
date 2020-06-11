@@ -4,6 +4,7 @@
       <el-col :lg='6' :md="8" :xs="12" :sm="8" v-for="item in value" :key="item.index">
         <div style="padding:10px;">
           <div style="background:red;height:200px;">
+              222
              {{item.aaa}}
              {{gettersGlobalData}}
           </div>
