@@ -5,37 +5,38 @@ axios.defaults.baseURL = '/api/v1'
 axios.defaults.timeout = 10000
 
 let loading
-let flag = true
+let flagNumber = 0
+
 // 打开loading
 function startLoading() {
-  loading = Loading.service({
-    lock: true,
-    text: '数据加载中...',
-    background: 'rgba(0,0,0,0)'
-  })
+  if(flagNumber==0){
+    loading = Loading.service({
+      lock: true,
+      text: '数据加载中...',
+      background: 'rgba(0,0,0,0.3)',
+      spinner:'el-icon-loading'
+    })
+  }
 }
 
 // 关闭loading
 function endLoading() {
-  loading.close()
-  flag = true
+  flagNumber--;
+  if(flagNumber<=0){
+    loading.close()
+  }
 }
 
 axios.interceptors.request.use(
   config => {
-    if (flag === true) {
-      startLoading()
-      flag = false
-    }
+    startLoading()
     return config
   },
   err => Promise.reject(err)
 )
 
 axios.interceptors.response.use(response => {
-  if (flag == false) {
-    endLoading()
-  }
+  endLoading()
   return response
 }, err => {
   endLoading()
