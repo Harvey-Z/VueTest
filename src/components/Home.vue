@@ -1,66 +1,93 @@
 <template>
   <div>
-    <el-row>
-      <el-col :lg='6' :md="8" :xs="12" :sm="8" v-for="item in value" :key="item.index">
-        <div style="padding:10px;">
-          <div style="background:red;height:200px;">
-             {{item.aaa}}
-             {{gettersGlobalData}}
-          </div>
-        </div>
-      </el-col>
-    </el-row>
+    <!-- <el-carousel :interval="4000"  height="70vh" style="width:50%;margin-left:25%" :autoplay='false' indicator-position="none" @change="change()">
+      <el-carousel-item v-for="item in 3" :key="item" >
+          <video-player  class="video-player vjs-custom-skin" 
+            ref="videoPlayer" 
+            :playsinline="true" 
+            :options="playerOptions"
+            @play="onPlayerPlay($event)"
+            @pause="onPlayerPause($event)"
+            @ended="onPlayerEnded($event)"
+          ></video-player>
+      </el-carousel-item>
+    </el-carousel> -->
+
+    <video-player  class="video-player vjs-custom-skin" style="width:50%"
+      ref="videoPlayer" 
+      :playsinline="true" 
+      :options="playerOptions"
+      @play="onPlayerPlay($event)"
+      @pause="onPlayerPause($event)"
+      @ended="onPlayerEnded($event)"
+    ></video-player>
   </div>
 </template>
-
 <script>
-import axios from "../api/api"
-import { mapGetters } from 'vuex'
 export default {
-  data() {
+  data(){
     return {
-      value: [
-        {
-          aaa:1
-        },
-        {
-          aaa:2
-        },
-        {
-          aaa:3
-        },
-        {
-          aaa:1
-        },
-        {
-          aaa:2
-        },
-        {
-          aaa:3
-        },
-        {
-          aaa:1
-        },
-        {
-          aaa:2
-        },
-        {
-          aaa:3
+      playerOptions : {
+        // playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
+        autoplay: false, //如果true,浏览器准备好时开始回放。
+        muted: false, // 默认情况下将会消除任何音频。
+        loop: true, // 导致视频一结束就重新开始。
+        preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
+        language: 'zh-CN',
+        aspectRatio: '16:9', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
+        fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
+        sources: [{
+          type: "video/mp4",//这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
+          src: "../../static/video/22.mp4"
+        }],
+        // poster: "../../static/images/test.jpg", //你的封面地址
+        // width: document.documentElement.clientWidth, //播放器宽度
+        notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
+        controlBar: {
+          timeDivider: true,
+          durationDisplay: true,
+          remainingTimeDisplay: false,
+          fullscreenToggle: true  //全屏按钮
         }
-      ]
+      }
     }
   },
   computed:{
-    ...mapGetters(['gettersGlobalData'])
+    player() {
+      return this.$refs.videoPlayer.player
+    }
   },
-  mounted(){
-    axios.get('/data/?id=15&key=R5RTF4G5F5H&stock=汽车之家').then(res=>{
-      // console.info(res)
-    })
+  methods:{
+    change(){
+      this.playerOptions.sources[0]['src'] = '../../static/video/11.mp4'
+      this.onPlayerPlay()
+    },
+      //播放事件
+    onPlayerPlay(player) {
+      this.paused = false
+      console.log('onPlayerPlay!', player)
+    },
+      //暂停事件
+    onPlayerPause(player) {
+      this.paused = true
+      console.log('onPlayerPause!', player)
+    },
+      //停止事件
+    onPlayerEnded(player) {
+      // this.paused = false
+      console.log('player ended!', player)
+      // this.change()
+      // this.playerOptions['sources'][0]['src'] = '../../static/video/22.mp4'
+    },
+
   }
 }
 </script>
 
-<style scoped>
-
+<style>
+.video-js .vjs-icon-placeholder {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
 </style>
