@@ -13,3 +13,6 @@ export default new Vuex.Store({
     state,
     mutations
 })
+
+//调用顺序，actions->mutations->state
+//getters 显示

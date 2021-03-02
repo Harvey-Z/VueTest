@@ -9,14 +9,19 @@ import store from './store'
 import Mint from 'mint-ui';
 import 'mint-ui/lib/style.css';
 import VideoPlayer from 'vue-video-player'
+
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';
+
 require('video.js/dist/video-js.css')
 require('vue-video-player/src/custom-theme.css')
-
+import { Base64 } from 'js-base64'
 Vue.use(VideoPlayer)
 Vue.use(Mint);
 Vue.use(ElementUI);
+Vue.use(Base64);
 Vue.config.productionTip = false
-
+Vue.use(iView);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

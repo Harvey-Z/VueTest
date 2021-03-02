@@ -54,9 +54,9 @@ export default {
   computed:{
     ...mapGetters(['gettersGlobalData'])
   },
-  mounted(){
-    axios.get('/data/?id=15&key=R5RTF4G5F5H&stock=汽车之家').then(res=>{
-      // console.info(res)
+  created(){
+    axios.get('/getJoke?page=1&count=2&type=video').then(res=>{
+      console.info(res)
     })
   }
 }

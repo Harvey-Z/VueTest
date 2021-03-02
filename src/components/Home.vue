@@ -12,8 +12,6 @@
       <el-button @click="change">上一个</el-button>
       <el-button @click="change">下一个</el-button>
     </div>
-
-    <div style="margin-top:100px">欢迎姚楠楠同学</div>
   </div>
 </template>
 <script>

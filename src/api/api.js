@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Loading } from 'element-ui'
 
-axios.defaults.baseURL = '/api/v1'
+axios.defaults.baseURL = ''
 axios.defaults.timeout = 10000
 
 let loading
