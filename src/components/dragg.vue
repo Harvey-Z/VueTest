@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div style="width:90%;margin-left:5%;">
     <el-button @click="getSelectData"><icon type="md-search"></icon>getSelectData</el-button>
     <dragTreeTable :data="treeData" :onDrag="onTreeDataChange" border></dragTreeTable>
   </div>
 </template>
 
 <script>
- import dragTreeTable from 'drag-tree-table'
+ import dragTreeTable from 'zhw-drag-tree-table'
   export default {
     components:{ dragTreeTable },
     data() {
@@ -55,17 +55,20 @@
             }],
           columns: [{
             type: 'checkbox',
-            isContainChildren: true,
+            title: '选择',
+            
+            isContainChildren: false,
             onChange: (item)=>{
               console.log(item)
               this.selectData = item
             }
           },{
             type: 'selection',
-            title: '名称',
+            title: '名称2',
             field: 'name',
             width: 260, 
             align: 'left',
+            onclick: this.aaa,
             formatter: (item) => {
               if(item.flag==1){
                 return '<img src="/static/image/4.jpg" style="position:absolute;top:15px;width:30px">'+'<a style="margin-left: 40px;">'+item.name+'</a>'
@@ -73,12 +76,40 @@
                 return '<img src="/static/image/3.jpg" style="position:absolute;top:15px;width:30px">'+'<a style="margin-left: 40px;">'+item.name+'</a>'
               }
             }
-          },
-          {
+          },{
+            type: 'default',
+            title: '名称1',
+            field: 'name',
+            width: 260, 
+            align: 'left',
+            formatter: (item) => {
+                return '<span>'+item.name+'</span>'
+            }
+          },{
+            type: 'default',
+            title: '名称',
+            field: 'name',
+            width: 260, 
+            align: 'left',
+            formatter: (item) => {
+                return '<span>'+item.name+'</span>'
+            }
+          },{
+            type: 'default',
+            title: '名称5',
+            field: 'name',
+            width: 260, 
+            align: 'left',
+            flex:1,
+            formatter: (item) => {
+                return '<span>'+item.name+'</span>'
+            }
+          },{
             title: '操作',
             type: 'action',
-            width: 150,
+            width: 250,
             align: 'center',
+            // flex:1,
             actions: [
               {
                 text: '查看角色',
@@ -86,8 +117,7 @@
                 formatter: (item) => {
                   return '<i>查看角色</i>'
                 }
-              },
-              {
+              },{
                 text: '编辑',
                 onclick: this.onEdit,
                 formatter: (item) => {
@@ -107,7 +137,7 @@
         this.flag = false
         for(var i=0;i<lists.length;i++){
           for(var j=0;j<lists[i].lists.length;j++){
-            if(lists[i].lists[j].lists.length>0){
+            if(lists[i].lists[j].lists.length>0 || lists[i].lists[j].flag==1){
               console.info(33)
               this.flag = true
               return
@@ -131,7 +161,11 @@
       },
       getSelectData(){
         console.info(this.selectData)
+      },
+      aaa(item){
+        console.info(item)
       }
     },
    }
 </script>
+
